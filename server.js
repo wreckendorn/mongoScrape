@@ -24,8 +24,9 @@ app.use(bodyParser.urlencoded({
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-
-mongoose.connect("mongodb://localhost/News");
+var MONGODB_URI = process.env.MONGODB_URI;
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 //THIS WORKS - grabs all scraped articles from the collection
 app.get("/", function(req, res) {
