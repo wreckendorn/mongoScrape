@@ -1,9 +1,27 @@
 
+$(document).on("click", "#home", function() {
+  $.ajax({
+    type: "GET",
+    url: "/"
+  });
+  console.log("home button clicked");
+});
+
+$(document).on("click", "#saved", function() {
+  $.ajax({
+    type: "GET",
+    url: "/saved"
+  });
+  console.log("save button clicked");
+});
+
 //-----------SAVE ARTICLE----------------
  //Waits for user to click on Save button next to article. This sends AJAX
  //call to /api/saved/:id so it can change state of saved to true in db.
  //then it console.logs "saved".
   $(document).on("click", ".data-Save", function() {
+  $(this).children().removeClass("btn-primary");
+  $(this).children().addClass("btn-danger");
     var thisId = $(this).attr("data-id");
     $.ajax({
       type: "GET",
@@ -24,6 +42,7 @@
       url: "/api/deleted/" + thisId,
     })
     console.log("article deleted");
+    location.reload();
   });
 
 
@@ -43,22 +62,19 @@ $(document).on("click", ".data-Notes", function() {
     method: "GET",
     url: "/api/notes/" + thisId,
     success: function(data){
-      console.log(data);
-
-      $("#notes").append("<p><input id='titleInput' name='title' ></p>");
-      $("#notes").append("<p><textarea id='bodyInput' name='body'></textarea></p>");
+      $("#notes").append("<h4>New Note</h4>");
+      $("#notes").append("<p><input id='titleInput' name='title' placeholder='Note title' ></p>");
+      $("#notes").append("<p><textarea id='bodyInput' name='body' placeholder='Type in notes here'></textarea></p>");
       $("#notes").append("<button type='button' class='btn btn-primary savenote' data-id='" + data._id + "'>Save Note</button>");
 
       if (data.note) {
         for (var i = 0; i < data.note.length; i++) {
-        console.log("Note title" + data.note[i].title);
-        console.log("Note body: " + data.note[i].body);
-        console.log("Note id is: " + data.note[i]._id);
-        $("#existingNotes").append("<p>" + data.note[i].title + "<span class='close deleteNote' data-id='" + data.note[i]._id + "'>X</span></p><hr>");
+        $("#existingNotes").append("<p>" + data.note[i].title + "<span class='close deleteNote' data-id='" + data.note[i]._id + "'>-</span></p><hr>");
         }
       }
       else{
-        $("#existingNotes").prepend("<p>There are no notes, yet</p>");
+        $("#existingNotes").append("<p>There are no notes, yet</p>");
+        console.log("why aren't there existing notes");
       }
     }
   });
@@ -87,7 +103,7 @@ $(document).on("click", ".savenote", function() {
       var i = data.note.length;
       i--;
       var id = data.note[i];
-      $("#existingNotes").append("<p>" + title + "<span class='close deleteNote' data-id='" + id + "'>X</span></p><hr>");
+      $("#existingNotes").append("<p>" + title + "<span class='close deleteNote' data-id='" + id + "'>-</span></p><hr>");
       $("#titleInput").val("");
       $("#bodyInput").val("");
     });

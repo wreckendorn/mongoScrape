@@ -24,6 +24,7 @@ mongoose.connect("mongodb://localhost/News");
 
 // ----- SHOW ALL SCRAPED ARTICLES -------
 app.get("/", function(req, res) {
+  console.log("showing all scraped articles");
   db.Article.find({}, function(err, found) {
     if (err) {
       console.log(err);
@@ -36,6 +37,7 @@ app.get("/", function(req, res) {
 
 // ----- SHOW SAVED ARTICLES ------
 app.get("/saved", function (req, res) {
+  console.log("showing all saved articles");
   db.Article.find({ saved: true}, function (err, found) {
     if (err) {
       console.log(err);
