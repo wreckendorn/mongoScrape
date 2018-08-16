@@ -17,7 +17,7 @@ There are three links at the top of the page when you first visit the site: Home
 
 ## Home
 The Home view is where you can see all of the scraped articles that currently exist in the database - whether they are saved or not. From here, you can choose to scrape Medium and add new articles to the database. You can also visit the Saved page.
-
+/Users/hecky/Desktop/Screen Shot 2018-08-16 at 4.28.29 PM.png
 [![CustomerViewVideo](https://img.youtube.com/vi/U76Re2yoxYg/0.jpg)](https://www.youtube.com/watch?v=U76Re2yoxYg)
 
 ## Scrape
