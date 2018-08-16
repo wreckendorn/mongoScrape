@@ -10,6 +10,7 @@ var app = express();
 var db = require("./models");
 var mongojs = require("mongojs");
 var PORT = process.env.PORT || 3000;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/News";
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ 
@@ -20,7 +21,8 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-mongoose.connect("mongodb://localhost/News");
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // ----- SHOW ALL SCRAPED ARTICLES -------
 app.get("/", function(req, res) {
