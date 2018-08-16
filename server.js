@@ -38,7 +38,7 @@ app.get("/", function(req, res) {
 });
 
 // ----- SHOW SAVED ARTICLES ------
-app.get("/saved", function (req, res) {
+app.get("/saved/", function (req, res) {
   console.log("showing all saved articles");
   db.Article.find({ saved: true}, function (err, found) {
     if (err) {
@@ -99,6 +99,24 @@ app.get("/api/notes/:id", function(req, res) {
   })
   .catch(function(err) {
     res.json(err);
+  });
+});
+
+
+app.get("/api/note/:id", function (req, res) {
+  console.log("looking up specific note to show details of: " + req);
+  db.Note.find(
+    { 
+      _id: mongojs.ObjectId(req.params.id)
+    }, 
+      function (err, noteData) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(noteData)
+      console.log(noteData);
+    }
   });
 });
 
