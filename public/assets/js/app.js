@@ -1,20 +1,4 @@
 
-$(document).on("click", "#home", function() {
-  $.ajax({
-    type: "GET",
-    url: "/"
-  })
-  console.log("home button clicked");
-});
-
-$(document).on("click", "#saved", function() {
-  $.ajax({
-    type: "GET",
-    url: "/saved/"
-  })
-  console.log("save button clicked");
-});
-
 //-----------SAVE ARTICLE----------------
  //Waits for user to click on Save button next to article. This sends AJAX
  //call to /api/saved/:id so it can change state of saved to true in db.
