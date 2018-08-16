@@ -45,7 +45,7 @@ app.get("/saved/", function (req, res) {
       console.log(err);
     }
     else {
-      res.render("saved", {articles:found})
+      res.render("saved", {articles:found});
     }
   });
 });
